@@ -1,0 +1,1 @@
+Built assets should be placed inside /dist folder.
