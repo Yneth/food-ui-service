@@ -15,6 +15,11 @@ module.exports = {
 
     resolve: {
         extensions: ['.js', '.jsx', '.json'],
+        alias: {
+            'ui-library': path.join(__dirname, '../src/ui-library'),
+            'components': path.join(__dirname, '../src/components'),
+            'services': path.join(__dirname, '../src/services')
+        }
     },
 
     module: {
@@ -34,7 +39,7 @@ module.exports = {
             {
                 test: /\.(svg|png|gif|jpeg|jpg|bmp)$/,
                 exclude: /node_modules/,
-                loader: 'file-loader?name=[name]-[hash].[ext]',
+                loader: 'file-loader?limit=8192&name=[name]-[hash].[ext]',
             },
         ],
     },
