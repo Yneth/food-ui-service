@@ -1,0 +1,8 @@
+{
+  "moduleNameMapper": {
+    "\\.(png|jpg|jpeg|gif|svg)$": "<rootDir>/client/config/__mocks__/dummy.js",
+    "\\.(css|scss)$": "<rootDir>/client/config/__mocks__/dummy.js"
+  },
+  "coverageReporters": ["html"],
+  "coverageDirectory": "./coverage"
+}

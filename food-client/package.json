@@ -1,0 +1,49 @@
+{
+  "name": "react-template",
+  "version": "0.0.1",
+  "description": "template of react project",
+  "scripts": {
+    "start": "webpack-dev-server --config ./config/webpack.dev.config.js --env=dev --open",
+    "prebuild": "npm run lint && npm run test",
+    "build": "webpack --config ./config/webpack.prod.config.js --env=prod",
+    "test": "jest",
+    "test:coverage": "npm test -- --coverage",
+    "test:dev": "npm test -- --watch",
+    "lint": "eslint -c ./config/.eslintrc.js ./src",
+    "lint:fix": "eslint -c ./config/.eslintrc.js --fix ./src"
+  },
+  "author": "Oleksandr Amirov",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-jest": "^19.0.0",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "css-loader": "^0.28.0",
+    "enzyme": "^2.9.1",
+    "enzyme-to-json": "^1.5.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
+    "html-webpack-plugin": "^2.28.0",
+    "jest": "^19.0.2",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.4",
+    "react-test-renderer": "^15.5.4",
+    "style-loader": "^0.16.1",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.5",
+    "webpack-merge": "^4.1.0"
+  },
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0"
+  }
+}
