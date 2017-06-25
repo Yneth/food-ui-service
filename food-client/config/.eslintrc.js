@@ -14,6 +14,8 @@ module.exports = {
         "linebreak-style": "off",
         "indent": ["error", 4],
         "react/jsx-indent": ["error", 4],
+        "react/require-default-props": "off",
+        "no-trailing-spaces": ["error", { "skipBlankLines": true }]
     },
     "settings": {
         "import/resolver": {
