@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+}
+
+[class*="col-"] {
+  float: left;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.container {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+@media only screen and (min-width: (@media-width + 1)) {
+  .mobile {
+    display: none;
+  }
+  .create-grid(12);
+}
+
+@media only screen and (max-width: @media-width) {
+  .desktop {
+    display: none;
+  }
+  .container {
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+  .create-grid(12, ~'-s');
+}
+
+//loop that creates grid of @n columns
+.create-grid(@n, @pref: ~'', @i: @n) when(@i > 0) {
+  .col@{pref}-@{i} {
+    width: 100% * @i / @n;
+  }
+  .push-r@{pref}-@{i} {
+    margin-right: 100% * @i / @n;
+  }
+  .push-l@{pref}-@{i} {
+    margin-left: 100% * @i / @n;
+  }
+  .create-grid(@n, @pref, @i - 1);
+}
