@@ -6,7 +6,7 @@
     "start": "webpack-dev-server --config ./config/webpack.dev.config.js --env=dev --open",
     "prebuild": "npm run lint && npm run test",
     "build": "webpack --config ./config/webpack.prod.config.js --env=prod",
-    "test": "jest",
+    "test": "jest --config ./config/jest.config.json",
     "test:coverage": "npm test -- --coverage",
     "test:dev": "npm test -- --watch",
     "lint": "eslint -c ./config/.eslintrc.js ./src",
