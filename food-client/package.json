@@ -14,6 +14,9 @@
   },
   "author": "Oleksandr Amirov",
   "license": "ISC",
+  "browserslist": [
+    "last 2 version"
+  ],
   "devDependencies": {
     "babel-jest": "^19.0.0",
     "babel-loader": "^7.0.0",
@@ -35,6 +38,7 @@
     "jest": "^19.0.2",
     "less": "^2.7.2",
     "less-loader": "^4.0.4",
+    "postcss-loader": "^2.0.6",
     "react-test-renderer": "^15.5.4",
     "style-loader": "^0.16.1",
     "url-loader": "^0.5.9",

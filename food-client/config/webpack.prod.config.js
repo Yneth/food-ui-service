@@ -1,6 +1,7 @@
 const webpack = require('webpack'),
     commonConfig = require('./webpack.common.config.js'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    path = require('path'),
     merge = require('webpack-merge');
 
 module.exports = merge(commonConfig, {
@@ -9,7 +10,17 @@ module.exports = merge(commonConfig, {
             {
                 test: /\.less/,
                 use: ExtractTextPlugin.extract({
-                    use: 'css-loader!less-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: { importLoaders: 1 }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: { config: { path: path.join(__dirname, './postcss.config.js') } }
+                        },
+                        'less-loader',
+                    ],
                     fallback: 'style-loader',
                 }),
             }
@@ -17,7 +28,7 @@ module.exports = merge(commonConfig, {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': '"prod"',
+            'process.env.NODE_ENV': JSON.stringify('production'),
         }),
         new webpack.optimize.UglifyJsPlugin(),
         new ExtractTextPlugin({ filename: 'style.css', allChunks: true }),
