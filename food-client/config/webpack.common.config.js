@@ -1,5 +1,4 @@
 const webpack = require('webpack'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     path = require('path');
 
@@ -30,13 +29,6 @@ module.exports = {
                 loader: 'babel-loader?presets[]=env&plugins[]=transform-object-rest-spread&plugins[]=transform-react-jsx',
             },
             {
-                test: /\.less/,
-                use: ExtractTextPlugin.extract({
-                    use: 'css-loader!less-loader',
-                    fallback: 'style-loader',
-                }),
-            },
-            {
                 test: /\.(svg|png|gif|jpeg|jpg|bmp)$/,
                 exclude: /node_modules/,
                 loader: 'file-loader?limit=8192&name=[name]-[hash].[ext]',
@@ -56,7 +48,6 @@ module.exports = {
             filename: 'index.html',
             template: 'src/index.html',
         }),
-        new ExtractTextPlugin({ filename: 'style.css', allChunks: true }),
     ],
 };
 

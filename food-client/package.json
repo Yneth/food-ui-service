@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "template of react project",
   "scripts": {
-    "start": "webpack-dev-server --config ./config/webpack.dev.config.js --env=dev --open",
+    "start": "webpack-dev-server --hot --config ./config/webpack.dev.config.js --env=dev --open",
     "prebuild": "npm run lint && npm run test",
     "build": "webpack --config ./config/webpack.prod.config.js --env=prod",
     "test": "jest --config ./config/jest.config.json",

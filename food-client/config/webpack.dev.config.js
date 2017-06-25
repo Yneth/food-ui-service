@@ -5,6 +5,15 @@ const webpack = require('webpack'),
 
 module.exports = merge(commonConfig, {
 
+    module: {
+        rules: [
+            {
+                test: /\.less/,
+                use: ['style-loader','css-loader', 'less-loader'],
+            }
+        ]
+    },
+
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"dev"',
