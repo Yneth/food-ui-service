@@ -1,0 +1,57 @@
+@import "../styles/variables";
+
+.button {
+  display: inline-block;
+
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 3px;
+
+  background-color: transparent;
+  cursor: pointer;
+
+  transition: background-color .2s, color .2s;
+}
+
+.create-brand-buttons(@i: length(@brand-types)) when (@i > 0) {
+  .create-brand-buttons(@i - 1);
+  @type: extract(@brand-types, @i);
+  @color: extract(@brand-colors, @i);
+
+  .button-@{type}:extend(.button) {
+    border-color: @color;
+
+    &:hover {
+      background-color: @color;
+      color: #fff;
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.create-brand-buttons();
+
+.button-sized(@mod) {
+  padding: @grid-base * @mod @grid-base * @mod * 2;
+  font-size: 10px + @mod * 2;
+}
+
+.button-small {
+  .button-sized(2);
+}
+
+.button-medium {
+  .button-sized(3);
+}
+
+.button-large {
+  .button-sized(4);
+}
+
