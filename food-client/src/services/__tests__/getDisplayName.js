@@ -1,28 +1,19 @@
+import React from 'react';
 import getDisplayName from '../getDisplayName';
 
 describe('#getDisplayName', () => {
-    it('should return display name of Component', () => {
-        const ComponentMock = {
-            displayName: 'name',
-        };
-
-        expect(getDisplayName(ComponentMock)).toEqual(ComponentMock.displayName);
+    it('should return display name of Component class', () => {
+        class ComponentMock extends React.Component {}
+        expect(getDisplayName(ComponentMock)).toBe('ComponentMock');
     });
 
-    it('should return display name of Element', () => {
-        const ElementMock = {
-            name: 'name',
-        };
-
-        expect(getDisplayName(ElementMock)).toEqual(ElementMock.name);
+    it('should return display name of functional Component', () => {
+        const FunctionalComponent = () => {};
+        expect(getDisplayName(FunctionalComponent)).toBe('FunctionalComponent');
     });
 
-    it('should return "Component" for random object', () => {
-        const RandomObject = {
-            prop: 'prop',
-        };
-
-        expect(getDisplayName(RandomObject)).toEqual('Component');
+    it('should return "Component" for anonymous Component', () => {
+        expect(getDisplayName(() => {})).toBe('Component');
     });
 
     it('should throw error without arguments', () => {
