@@ -1,4 +1,15 @@
 {
   "presets": ["env"],
-  "plugins": ["transform-object-rest-spread", "transform-react-jsx"]
+  "plugins": [
+    "transform-object-rest-spread",
+    "transform-react-jsx",
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "ui-library": "./ui-library",
+        "components": "./components",
+        "services": "./services"
+      }
+    }]
+  ]
 }
