@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IntlProvider should render children 1`] = `
+<div>
+  Provider
+</div>
+`;
