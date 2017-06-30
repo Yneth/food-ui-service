@@ -1,5 +1,11 @@
+server:
+  port: 8090
 spring:
+  application:
+    name: food-ui-server
   mvc:
     static-path-pattern: /**
-
-server.port: 8081
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9401/eureka/
