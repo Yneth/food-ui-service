@@ -8,6 +8,7 @@
         <groupId>io.dash</groupId>
         <artifactId>food-ui-service</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>food-client</artifactId>
@@ -18,8 +19,8 @@
     <build>
         <resources>
             <resource>
-                <directory>/dist</directory>
-                <targetPath>/public</targetPath>
+                <directory>dist/</directory>
+                <targetPath>public/</targetPath>
             </resource>
         </resources>
     </build>

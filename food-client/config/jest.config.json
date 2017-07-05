@@ -4,5 +4,14 @@
     "\\.(css|less)$": "<rootDir>/config/__mocks__/dummy.js"
   },
   "coverageReporters": ["html"],
-  "coverageDirectory": "./coverage"
+  "coverageDirectory": "./coverage",
+  "collectCoverageFrom" : ["**/*.{js,jsx}", "!**/__tests__/**", "!**/config/**"],
+  "coverageThreshold": {
+    "global": {
+      "branches": 80,
+      "functions": 80,
+      "lines": 80,
+      "statements": 80
+    }
+  }
 }
