@@ -10,8 +10,8 @@ const Button = ({ type = 'primary', size = 'medium', onClick, children }) => {
 
 Button.propTypes = {
     children: PropTypes.string.isRequired,
-    type: PropTypes.string,
-    size: PropTypes.string,
+    type: PropTypes.oneOf(['primary', 'success', 'info', 'warning', 'danger']),
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
     onClick: PropTypes.func,
 };
 
