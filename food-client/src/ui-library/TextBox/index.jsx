@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getId from 'services/getId';
+import classNames from 'services/classNames';
 import './style.less';
 
 class TextBox extends React.Component {
@@ -54,13 +55,13 @@ class TextBox extends React.Component {
     }
 
     render() {
-        const { inputRef, placeholder } = this.props;
+        const { inputRef, placeholder, className } = this.props;
         const { value } = this.state;
 
         const props = {
             id: this.id,
             ref: inputRef,
-            className: 'text-box__input',
+            className: classNames('text-box__input', className),
             onChange: this.handleChange,
             value,
             placeholder,
@@ -89,6 +90,7 @@ TextBox.propTypes = {
     label: PropTypes.string,
     error: PropTypes.string,
     placeholder: PropTypes.string,
+    className: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.array]),
 };
 
 export default TextBox;
