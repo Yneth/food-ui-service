@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import getId from 'services/getId';
 import './style.less';
-
-const getId = () => {
-    return Date.now().toString(36) + Math.random().toString(36);
-};
 
 class TextBox extends React.Component {
 
@@ -34,31 +31,46 @@ class TextBox extends React.Component {
     renderLabel() {
         const { label } = this.props;
 
-        return label ? <label htmlFor={this.id}>{ label }</label> : null;
+        return label ?
+            <label className="text-box__label" htmlFor={this.id}>{ label }</label>
+            :
+            null;
     }
 
-    renderInput(type, props) {
-        const { value } = this.state;
+    renderError() {
+        const { error } = this.props;
+
+        return error ? <span className="text-box__error">{ error }</span> : null;
+    }
+
+    renderInput(props) {
+        const { type } = this.props;
 
         if (type === 'area') {
-            return <textarea {...props}>{value}</textarea>;
+            return <textarea {...props} />;
         }
 
-        return <input type={type} {...props} value={value} />;
+        return <input type={type} {...props} />;
     }
 
     render() {
-        const { type } = this.props;
+        const { inputRef, placeholder } = this.props;
+        const { value } = this.state;
 
         const props = {
             id: this.id,
+            ref: inputRef,
+            className: 'text-box__input',
             onChange: this.handleChange,
+            value,
+            placeholder,
         };
 
         return (
             <div>
                 { this.renderLabel() }
-                { this.renderInput(type, props) }
+                { this.renderInput(props) }
+                { this.renderError() }
             </div>
         );
     }
@@ -71,9 +83,12 @@ TextBox.defaultProps = {
 
 TextBox.propTypes = {
     onChange: PropTypes.func,
+    inputRef: PropTypes.func,
     type: PropTypes.oneOf(['text', 'password', 'area']),
     defaultValue: PropTypes.string,
     label: PropTypes.string,
+    error: PropTypes.string,
+    placeholder: PropTypes.string,
 };
 
 export default TextBox;

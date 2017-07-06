@@ -7,7 +7,12 @@ export default () => {
     ReactDom.render(
         <div>
             <Button>Click me!</Button>
-            <TextBox type="area" label="Hello world:" defaultValue="Hello" />
+            <TextBox
+                inputRef={ref => console.log(ref)}
+                type="text" label="Hello world:"
+                placeholder="wow"
+                error="big error"
+            />
         </div>,
         document.getElementById('root'),
     );
