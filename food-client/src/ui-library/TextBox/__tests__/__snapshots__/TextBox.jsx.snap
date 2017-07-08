@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextBox component should render input 1`] = `
+<div>
+  <input
+    className="text-box__input"
+    id={0}
+    onChange={[Function]}
+    placeholder={undefined}
+    type="text"
+    value=""
+  />
+</div>
+`;
+
+exports[`TextBox component should render input with customization 1`] = `
+<div>
+  <label
+    className="text-box__label"
+    htmlFor={2}
+  >
+    INPUT:
+  </label>
+  <input
+    className="text-box__input custom class"
+    id={2}
+    onChange={[Function]}
+    placeholder={undefined}
+    type="text"
+    value="val"
+  />
+  <span
+    className="text-box__error"
+  >
+    NOT VALID
+  </span>
+</div>
+`;
+
+exports[`TextBox component should render textarea 1`] = `
+<div>
+  <textarea
+    className="text-box__input"
+    id={1}
+    onChange={[Function]}
+    placeholder={undefined}
+    value=""
+  />
+</div>
+`;
