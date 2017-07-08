@@ -19,6 +19,11 @@ describe('Button component', () => {
         expect(tree).toMatchSnapshot();
     });
 
+    it('should render with custom className', () => {
+        const tree = renderer.create(<Button className="custom_class">Hello</Button>).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
     it('should call handler on click event', () => {
         const handler = jest.fn();
         const wrapper = mount(<Button onClick={handler}>Hello</Button>);

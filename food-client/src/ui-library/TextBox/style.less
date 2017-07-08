@@ -1,0 +1,31 @@
+@import "../styles/variables";
+
+@border-color: lighten(@brand-primary, 30%);
+
+.text-box__input {
+  padding: .5em .8em;
+
+  border: 1px solid @gray-light;
+
+  border-radius: 4px;
+  transition: border-color .3s, box-shadow .3s;
+
+  &:focus {
+    border-color: @border-color;
+    outline: none;
+    box-shadow: 0 0 8px @border-color;
+  }
+}
+
+.text-box__label {
+  display: block;
+  margin: .5em 0;
+
+  font-weight: 700;
+}
+
+.text-box__error {
+  display: block;
+  font-size: 0.9em;
+  color: @brand-danger;
+}
