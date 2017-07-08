@@ -17,7 +17,8 @@ module.exports = {
         alias: {
             'ui-library': path.join(__dirname, '../src/ui-library'),
             'components': path.join(__dirname, '../src/components'),
-            'services': path.join(__dirname, '../src/services')
+            'services': path.join(__dirname, '../src/services'),
+            'features': path.join(__dirname, '../src/features'),
         }
     },
 

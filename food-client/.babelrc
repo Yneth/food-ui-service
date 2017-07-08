@@ -8,7 +8,8 @@
       "alias": {
         "ui-library": "./ui-library",
         "components": "./components",
-        "services": "./services"
+        "services": "./services",
+        "features": "./features"
       }
     }]
   ]
