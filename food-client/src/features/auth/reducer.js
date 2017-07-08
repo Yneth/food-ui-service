@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT } from './constants';
+import { login, logout } from './actions';
 
 const initialState = {
     username: '',
@@ -7,13 +7,13 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOG_IN:
+        case login.type:
             return {
                 ...state,
                 username: action.payload.username,
                 token: action.payload.token,
             };
-        case LOG_OUT:
+        case logout.type:
             return initialState;
         default:
             return state;
