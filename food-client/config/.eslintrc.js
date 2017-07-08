@@ -13,7 +13,7 @@ module.exports = {
     "rules": {
         "linebreak-style": "off",
         "no-plusplus": "off",
-        "indent": ["error", 4],
+        "indent": ["error", 4, { "SwitchCase": 1 }],
         "react/jsx-indent": ["error", 4],
         "react/jsx-indent-props": ["error", 4],
         "react/require-default-props": "off",
