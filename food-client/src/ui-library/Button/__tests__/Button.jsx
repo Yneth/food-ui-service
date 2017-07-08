@@ -9,18 +9,16 @@ describe('Button component', () => {
         expect(tree).toMatchSnapshot();
     });
 
-    it('should render with type specified', () => {
-        const tree = renderer.create(<Button type="danger">Hello</Button>).toJSON();
-        expect(tree).toMatchSnapshot();
-    });
-
-    it('should render with size specified', () => {
-        const tree = renderer.create(<Button size="large">Hello</Button>).toJSON();
-        expect(tree).toMatchSnapshot();
-    });
-
-    it('should render with custom className', () => {
-        const tree = renderer.create(<Button className="custom_class">Hello</Button>).toJSON();
+    it('should render with customization', () => {
+        const tree = renderer.create(
+            <Button
+                type="danger"
+                size="large"
+                className="custom_class"
+            >
+                Hello
+            </Button>,
+        ).toJSON();
         expect(tree).toMatchSnapshot();
     });
 

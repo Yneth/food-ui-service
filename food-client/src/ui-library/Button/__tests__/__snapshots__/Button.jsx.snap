@@ -9,27 +9,9 @@ exports[`Button component should render 1`] = `
 </button>
 `;
 
-exports[`Button component should render with custom className 1`] = `
+exports[`Button component should render with customization 1`] = `
 <button
-  className="button-primary button-medium custom_class"
-  onClick={undefined}
->
-  Hello
-</button>
-`;
-
-exports[`Button component should render with size specified 1`] = `
-<button
-  className="button-primary button-large"
-  onClick={undefined}
->
-  Hello
-</button>
-`;
-
-exports[`Button component should render with type specified 1`] = `
-<button
-  className="button-danger button-medium"
+  className="button-danger button-large custom_class"
   onClick={undefined}
 >
   Hello
