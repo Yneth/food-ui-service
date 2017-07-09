@@ -96,7 +96,7 @@ describe('configureActions', () => {
             return creator({ message: 'hello' })(dispatch).then(() => {
                 expect(dispatch).toHaveBeenCalledWith({
                     type: 'PREFIX/TYPE_SUCCESS',
-                    result: { message: 'hello' },
+                    payload: { result: { message: 'hello' } },
                 });
             });
         });
@@ -109,7 +109,7 @@ describe('configureActions', () => {
             return creator({ msg1: 'hello', msg2: 'world' })(dispatch).then(() => {
                 expect(dispatch).toHaveBeenCalledWith({
                     type: 'PREFIX/TYPE_SUCCESS',
-                    result: { message: 'hello' },
+                    payload: { result: { message: 'hello' } },
                 });
             });
         });
@@ -122,7 +122,7 @@ describe('configureActions', () => {
             return creator({ msg1: 'hello', msg2: 'world' })(dispatch).then(() => {
                 expect(dispatch).toHaveBeenCalledWith({
                     type: 'PREFIX/TYPE_FAILURE',
-                    error: 'error!',
+                    payload: { error: 'error!' },
                 });
             });
         });
@@ -135,7 +135,7 @@ describe('configureActions', () => {
             return creator({ msg1: 'hello', msg2: 'world' })(dispatch).then(() => {
                 expect(dispatch).toHaveBeenCalledWith({
                     type: 'PREFIX/TYPE_FAILURE',
-                    error: 'error!',
+                    payload: { error: 'error!' },
                 });
             });
         });

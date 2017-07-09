@@ -29,12 +29,12 @@ const configureActions = (prefix = '') => (type, interceptor) => {
         return promiseCreator(...payload)
             .then((result) => {
                 if (!result.error) {
-                    dispatch({ type: asyncTypes.success, result });
+                    dispatch({ type: asyncTypes.success, payload: { result } });
                 } else {
-                    dispatch({ type: asyncTypes.failure, error: result.error });
+                    dispatch({ type: asyncTypes.failure, payload: { error: result.error } });
                 }
             })
-            .catch(error => dispatch({ type: asyncTypes.failure, error }));
+            .catch(error => dispatch({ type: asyncTypes.failure, payload: { error } }));
     };
 
     asyncCreator.type = asyncTypes;
