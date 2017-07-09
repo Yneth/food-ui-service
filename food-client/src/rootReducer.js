@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { reducer as auth } from 'features/auth';
+import { reducer as auth, constants as authConstants } from 'features/auth';
 
 const rootReducer = combineReducers({
-    auth,
+    [authConstants.AUTH_KEY]: auth,
 });
 
 export default rootReducer;
