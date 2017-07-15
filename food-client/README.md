@@ -12,18 +12,22 @@
       - ItemsTape
       - SearchBox
       - SuggestionsInput
-    - **features/** (should be flat without deep nesting, container components should be here)
+    - **features/** (logic grouping, should be flat without deep nesting, container components should be here)
       - **Auth/**
         - index.js (exports feature api)
         - reducer.js
         - actions.js
         - constants.js
         - auth.service.js (api calls)
-        - **components/** (private feature-specific components)
+        - **components/** (feature-specific components)
           - PartOfLoginPage.jsx
-        - **views/** (exported container components of feature)
           - LoginSnippet.jsx
           - LoginPage.jsx
+          - index.js (export of public components)
+    - **scenes/** (pages or big sections of the app, uses features)
+      - **Home**/ (role of the mediator for used features)
+        - index.js (component)
+        - reducer.js (page state f.e. loading state)
     - **services/**
       - **localStorage**
       - deepFreeze.js
