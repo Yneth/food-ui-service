@@ -1,3 +1,4 @@
+import deepFreeze from 'services/deepFreeze';
 import reducer from '../reducer';
 import * as actions from '../actions';
 
@@ -25,6 +26,8 @@ describe('auth reducer', () => {
             token: '123',
         };
 
+        deepFreeze(state);
+
         const expectedState = {
             error: '',
             loading: false,
@@ -42,6 +45,8 @@ describe('auth reducer', () => {
             username: '',
             token: '',
         };
+
+        deepFreeze(state);
 
         const expectedState = {
             error: '',
@@ -62,6 +67,8 @@ describe('auth reducer', () => {
             username: '',
             token: '',
         };
+
+        deepFreeze(state);
 
         const action = {
             type: actions.login.type.success,
