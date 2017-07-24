@@ -44,9 +44,9 @@ const LocalStorage = {
     },
 
     has(key) {
-        const value = localStorage.getItem(key);
+        const value = LocalStorage.get(key);
 
-        return value !== null;
+        return value !== null && value !== undefined;
     },
 
     get length() {
