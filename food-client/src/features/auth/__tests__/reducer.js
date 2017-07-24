@@ -35,7 +35,7 @@ describe('auth reducer', () => {
             token: '',
         };
 
-        expect(reducer(state, actions.logout())).toEqual(expectedState);
+        expect(reducer(state, { type: actions.logout.type })).toEqual(expectedState);
     });
 
     it('should handle LOGIN request action', () => {
