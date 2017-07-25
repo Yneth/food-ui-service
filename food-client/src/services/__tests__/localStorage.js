@@ -5,7 +5,7 @@ const localStorageMock = (() => {
     let length = 0;
     return {
         getItem(key) {
-            return store[key];
+            return store[key] || null;
         },
         setItem(key, value) {
             length++;
@@ -95,7 +95,7 @@ describe('LocalStorage service', () => {
             }));
 
             expect(LocalStorage.get('key')).toBe(null);
-            expect(localStorage.getItem('key')).toBe(undefined);
+            expect(localStorage.getItem('key')).toBe(null);
         });
     });
 
@@ -105,7 +105,7 @@ describe('LocalStorage service', () => {
 
             LocalStorage.remove('key');
 
-            expect(localStorage.getItem('key')).toBe(undefined);
+            expect(localStorage.getItem('key')).toBe(null);
         });
     });
 
@@ -117,9 +117,9 @@ describe('LocalStorage service', () => {
             LocalStorage.clear();
 
             expect(localStorage.length).toBe(0);
-            expect(localStorage.getItem('key1')).toBe(undefined);
-            expect(localStorage.getItem('key2')).toBe(undefined);
-            expect(localStorage.getItem('key3')).toBe(undefined);
+            expect(localStorage.getItem('key1')).toBe(null);
+            expect(localStorage.getItem('key2')).toBe(null);
+            expect(localStorage.getItem('key3')).toBe(null);
         });
     });
 
