@@ -9,6 +9,7 @@ describe('auth actions', () => {
     beforeEach(() => {
         localStorageMock = {
             add: jest.fn(),
+            get: jest.fn(),
             remove: jest.fn(),
         };
 
@@ -43,10 +44,19 @@ describe('auth actions', () => {
             expect(actions.logout.type).toBe('AUTH/LOG_OUT');
         });
 
-        it('should remove token in local storage', () => {
+        it('should remove token from local storage', () => {
             actions.logout();
             expect(localStorageMock.remove).toHaveBeenCalledWith(
                 STORAGE_TOKEN_KEY,
+            );
+        });
+
+        it('should remove cached data from local storage', () => {
+            const token = 'abcd';
+            localStorageMock.get.mockReturnValueOnce(token);
+            actions.logout();
+            expect(localStorageMock.remove).toHaveBeenCalledWith(
+                token,
             );
         });
     });

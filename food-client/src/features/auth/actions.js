@@ -16,5 +16,7 @@ export const login = configureAction('LOG_IN', (username) => {
 }).async;
 
 export const logout = configureAction('LOG_OUT', () => {
+    const token = LocalStorage.get(STORAGE_TOKEN_KEY);
     LocalStorage.remove(STORAGE_TOKEN_KEY);
+    LocalStorage.remove(token);
 });
