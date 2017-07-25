@@ -36,49 +36,63 @@ describe('LocalStorage service', () => {
         it('should add value by key to localStorage', () => {
             LocalStorage.add('key', 'value');
 
-            expect(localStorage.getItem('key')).toBe('value');
-        });
-
-        it('should add set value type', () => {
-            LocalStorage.add('key', 'value');
-
-            expect(localStorage.getItem('key%type%')).toBe('string');
+            expect(localStorage.getItem('key')).toBe(JSON.stringify({
+                value: 'value',
+                expires: null,
+            }));
         });
 
         it('should add expiration date if passed', () => {
             LocalStorage.add('key', 'value', new Date(30));
 
-            expect(localStorage.getItem('key%expires%')).toBe('30');
+            expect(localStorage.getItem('key')).toBe(JSON.stringify({
+                value: 'value',
+                expires: 30,
+            }));
         });
 
         it('should stringify object as json', () => {
             LocalStorage.add('key', { prop: 'value' });
 
-            expect(localStorage.getItem('key')).toBe('{"prop":"value"}');
+            expect(localStorage.getItem('key')).toBe(JSON.stringify({
+                value: { prop: 'value' },
+                expires: null,
+            }));
         });
     });
 
     describe('get', () => {
         it('should get value by key to localStorage', () => {
-            localStorage.setItem('key', 'value');
-            localStorage.setItem('key%type%', 'string');
+            localStorage.setItem('key', JSON.stringify({
+                value: 'value',
+                expires: null,
+            }));
 
             expect(LocalStorage.get('key')).toBe('value');
         });
 
         it('should get parsed json', () => {
-            localStorage.setItem('key', '{"prop":"value"}');
-            localStorage.setItem('key%type%', 'object');
+            localStorage.setItem('key', JSON.stringify({
+                value: {
+                    prop: 'value',
+                },
+                expires: null,
+            }));
 
             expect(LocalStorage.get('key')).toEqual({
                 prop: 'value',
             });
         });
 
+        it('should return null if item does not exist', () => {
+            expect(LocalStorage.get('key')).toBe(null);
+        });
+
         it('should return null and remove if item expired', () => {
-            localStorage.setItem('key', 'value');
-            localStorage.setItem('key%type%', 'string');
-            localStorage.setItem('key%expires%', 30);
+            localStorage.setItem('key', JSON.stringify({
+                value: 'value',
+                expires: 30,
+            }));
 
             expect(LocalStorage.get('key')).toBe(null);
             expect(localStorage.getItem('key')).toBe(undefined);
@@ -88,14 +102,10 @@ describe('LocalStorage service', () => {
     describe('remove', () => {
         it('should remove value by key', () => {
             localStorage.setItem('key', 'value');
-            localStorage.setItem('key%type%', 'string');
-            localStorage.setItem('key%expires%', '0');
 
             LocalStorage.remove('key');
 
-            expect(LocalStorage.get('key')).toBe(undefined);
-            expect(LocalStorage.get('key%type%')).toBe(undefined);
-            expect(LocalStorage.get('key%expires%')).toBe(undefined);
+            expect(localStorage.getItem('key')).toBe(undefined);
         });
     });
 
@@ -107,9 +117,9 @@ describe('LocalStorage service', () => {
             LocalStorage.clear();
 
             expect(localStorage.length).toBe(0);
-            expect(LocalStorage.get('key1')).toBe(undefined);
-            expect(LocalStorage.get('key2')).toBe(undefined);
-            expect(LocalStorage.get('key3')).toBe(undefined);
+            expect(localStorage.getItem('key1')).toBe(undefined);
+            expect(localStorage.getItem('key2')).toBe(undefined);
+            expect(localStorage.getItem('key3')).toBe(undefined);
         });
     });
 
@@ -126,30 +136,32 @@ describe('LocalStorage service', () => {
     describe('expired', () => {
         it('should return true if date now is bigger than exp date', () => {
             Date.now = () => 31;
-            localStorage.setItem('key', 'value');
-            localStorage.setItem('key%expires%', 30);
 
-            expect(LocalStorage.expired('key')).toBe(true);
+            expect(LocalStorage.expired({
+                value: 'value',
+                expires: 30,
+            })).toBe(true);
         });
 
         it('should return false if date now is smaller than exp date', () => {
             Date.now = () => 1;
-            localStorage.setItem('key', 'value');
-            localStorage.setItem('key%expires%', 30);
-
-            expect(LocalStorage.expired('key')).toBe(false);
+            expect(LocalStorage.expired({
+                value: 'value',
+                expires: 30,
+            })).toBe(false);
         });
 
-        it('should item with such key does not exist', () => {
-            expect(LocalStorage.expired('key')).toBe(false);
+        it('should return true if item does not exist', () => {
+            expect(LocalStorage.expired(null)).toBe(true);
         });
     });
 
     describe('has', () => {
         it('should return true if item exists', () => {
-            localStorage.setItem('key', 'value');
-            localStorage.setItem('key%type%', 'string');
-            localStorage.setItem('key%expires%', 30);
+            localStorage.setItem('key', JSON.stringify({
+                value: 'value',
+                expires: null,
+            }));
 
             expect(LocalStorage.has('key')).toBe(true);
         });
@@ -160,9 +172,10 @@ describe('LocalStorage service', () => {
 
         it('should return false if item has expired', () => {
             Date.now = () => 31;
-            localStorage.setItem('key', 'value');
-            localStorage.setItem('key%type%', 'string');
-            localStorage.setItem('key%expires%', 30);
+            localStorage.setItem('key', JSON.stringify({
+                value: 'value',
+                expires: 30,
+            }));
 
             expect(LocalStorage.has('key')).toBe(false);
         });

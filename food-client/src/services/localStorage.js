@@ -1,42 +1,32 @@
-const TYPE_SUFFIX = '%type%';
-const EXPIRES_SUFFIX = '%expires%';
-
 const LocalStorage = {
     add(key, value, expires) {
-        const type = typeof value;
+        const item = {
+            value,
+            expires: expires ? +expires : null,
+        };
 
-        if (type === 'object') {
-            value = JSON.stringify(value);
-        }
-
-        localStorage.setItem(key, value);
-        localStorage.setItem(`${key}${TYPE_SUFFIX}`, type);
-        if (expires) {
-            localStorage.setItem(`${key}${EXPIRES_SUFFIX}`, expires.getTime());
-        }
+        localStorage.setItem(key, JSON.stringify(item));
     },
 
     get(key) {
-        if (LocalStorage.expired(key)) {
+        const item = JSON.parse(localStorage.getItem(key) || null);
+
+        if (LocalStorage.expired(item)) {
             LocalStorage.remove(key);
             return null;
         }
 
-        const type = localStorage.getItem(`${key}${TYPE_SUFFIX}`);
-        const value = localStorage.getItem(key);
-
-        return type === 'object' ? JSON.parse(value) : value;
+        return item.value;
     },
 
-    expired(key) {
-        const expires = localStorage.getItem(`${key}${EXPIRES_SUFFIX}`);
-        return expires !== null && expires !== undefined && +expires <= Date.now();
+    expired(item) {
+        // If there is no item or expiration date passed
+        return !item
+            || (item.expires !== null && item.expires !== undefined && +item.expires <= Date.now());
     },
 
     remove(key) {
         localStorage.removeItem(key);
-        localStorage.removeItem(`${key}${TYPE_SUFFIX}`);
-        localStorage.removeItem(`${key}${EXPIRES_SUFFIX}`);
     },
 
     clear() {
@@ -44,9 +34,9 @@ const LocalStorage = {
     },
 
     has(key) {
-        const value = LocalStorage.get(key);
+        const item = JSON.parse(localStorage.getItem(key) || null);
 
-        return value !== null && value !== undefined;
+        return !LocalStorage.expired(item);
     },
 
     get length() {
