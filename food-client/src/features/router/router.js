@@ -1,5 +1,4 @@
 import { setRoute } from './actions';
-import { selectRouterData } from './selectors';
 
 let instance = null;
 
@@ -7,7 +6,6 @@ class Router {
 
     static initialize(...args) {
         instance = new Router(...args);
-        instance.onInit();
         return instance;
     }
 
@@ -69,15 +67,6 @@ class Router {
         const matches = this.matchPath(path);
         history.pushState({ path, matches }, null, path);
         this.setState(path, matches);
-    }
-
-    onInit() {
-        const currentPath = location.pathname;
-        const initialState = history.state || this.matchPath(currentPath);
-
-        history.replaceState(initialState, null, initialState.path);
-
-        this.setState(currentPath, initialState.matches);
     }
 
     onPopState(e) {
