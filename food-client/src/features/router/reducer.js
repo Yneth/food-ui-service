@@ -1,4 +1,4 @@
-import { changeRoute } from './actions';
+import { setRoute } from './actions';
 
 const initialState = {
     path: '',
@@ -7,7 +7,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case changeRoute.type:
+        case setRoute.type:
             return {
                 ...action.payload,
             };
