@@ -21,10 +21,11 @@ module.exports = merge(commonConfig, {
     ],
 
     devServer: {
+        historyApiFallback: true,
         contentBase: path.join(__dirname, 'build'),
         port: 3000,
         proxy: {
-            '!**/*.(js|css|html|ico)': 'http://localhost:5000',
+            '/api': 'http://localhost:5000',
         },
     },
 
