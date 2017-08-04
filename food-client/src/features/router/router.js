@@ -1,24 +1,16 @@
 import { setRoute } from './actions';
 
-let instance = null;
-
 class Router {
 
-    static initialize(...args) {
-        instance = new Router(...args);
-        return instance;
-    }
-
-    static get instance() {
-        return instance;
-    }
-
-    constructor(store) {
-        this.store = store;
+    constructor() {
         this.routes = {};
         this.patternsCache = {};
 
         window.addEventListener('popstate', this.onPopState.bind(this));
+    }
+
+    setStore(store) {
+        this.store = store;
     }
 
     registerRoute(name, pattern) {
@@ -61,6 +53,12 @@ class Router {
         }
 
         return this.patternsCache[pattern];
+    }
+
+    replaceTo(path) {
+        const matches = this.matchPath(path);
+        history.replaceState({ path, matches }, null, path);
+        this.setState(path, matches);
     }
 
     navigate(path) {

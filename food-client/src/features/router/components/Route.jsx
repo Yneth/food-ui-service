@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Router from '../router';
 import { selectMatch, selectRouterData } from '../selectors';
 
 class Route extends React.Component {
     componentDidMount() {
         const { name, pattern } = this.props;
-        Router.instance.registerRoute(name, pattern);
+        const { router } = this.context;
+        router.registerRoute(name, pattern);
     }
 
     componentWillUnmount() {
-        Router.instance.removeRoute(this.props.name);
+        const { router } = this.context;
+        router.removeRoute(this.props.name);
     }
 
     render() {
@@ -28,6 +29,13 @@ Route.propTypes = {
     path: PropTypes.string,
     match: PropTypes.objectOf(PropTypes.string),
     children: PropTypes.element.isRequired,
+};
+
+Route.contextTypes = {
+    router: PropTypes.shape({
+        registerRoute: PropTypes.func.isRequired,
+        removeRoute: PropTypes.func.isRequired,
+    }),
 };
 
 const mapDispatchToProps = (state, ownProps) => ({
